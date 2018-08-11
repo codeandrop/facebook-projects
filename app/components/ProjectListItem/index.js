@@ -1,18 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import styled from 'styled-components';
+import './ProjectListItem.css';
 
 class Project extends React.Component {
   render() {
     const { project, getProjectDetail } = this.props;
     return (
-      <div>
+      <div className="ProjectListItem">
+        <hr />
         <button
+          className="button"
           onClick={() => getProjectDetail(project.full_name, 'contributors')}
         >
-          Project Name: {project.name}
+          <strong>Project:</strong>
+          {project.name}
         </button>
-        <div>Watchers: {project.watchers}</div>
+        <br />
+        <span>
+          <strong>Watchers:</strong> {project.watchers}
+        </span>
       </div>
     );
   }

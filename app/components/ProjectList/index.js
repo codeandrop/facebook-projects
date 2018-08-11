@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './ProjectList.css';
 
-import Project from '../../components/Project';
+import ProjectListItem from '../../components/ProjectListItem';
 
 class ProjectList extends React.Component {
   constructor(props) {
@@ -18,11 +18,7 @@ class ProjectList extends React.Component {
   sortProject = (a, b) => b[this.state.sortField] - a[this.state.sortField];
 
   render() {
-    const { projects, sortDirection, isLoading } = this.state;
-
-    if (isLoading) {
-      return <div>Loading sidenav...</div>;
-    }
+    const { projects, sortDirection } = this.state;
 
     let projectsSorted = projects.sort(this.sortProject);
 
@@ -30,14 +26,16 @@ class ProjectList extends React.Component {
       projectsSorted = projectsSorted.reverse();
     }
 
-    return projectsSorted.map(project => (
-      <div className="item" key={project.id}>
-        <Project
+    const projectList = projectsSorted.map(project => (
+      <div key={project.id}>
+        <ProjectListItem
           project={project}
           getProjectDetail={this.props.getProjectDetail}
         />
       </div>
     ));
+
+    return <div className="ProjectList">{projectList}</div>;
   }
 }
 

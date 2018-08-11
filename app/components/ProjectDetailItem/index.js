@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './ProjectDetailItem.css';
 
 class ProjectDetailItem extends React.Component {
   render() {
@@ -7,10 +8,10 @@ class ProjectDetailItem extends React.Component {
 
     if (detailType === 'contributors') {
       return (
-        <div>
+        <div className="ProjectDetailItem">
           <div>{item.login}</div>
           <div>
-            <img width="32" src={item.avatar_url} alt="profile" />{' '}
+            <img width="48" src={item.avatar_url} alt="profile" />
           </div>
         </div>
       );

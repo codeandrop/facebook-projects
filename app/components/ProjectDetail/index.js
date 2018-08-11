@@ -1,37 +1,58 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ProjectDetailItem from '../../components/ProjectDetailItem';
+import Loading from '../../components/Loading';
+import ErrorMessage from '../../components/ErrorMessage';
+import './ProjectDetail.css';
 
 class ProjectDetail extends React.Component {
   render() {
     const {
+      currentProject,
       projectDetail,
       detailType,
       isDetailLoading,
       haveDetailError,
     } = this.props;
 
-    if (!projectDetail) {
-      return <div>Select one project on side nav to display details</div>;
-    }
-
     if (isDetailLoading) {
-      return <div>Loading detail...</div>;
+      return <Loading />;
     }
 
     if (haveDetailError) {
-      return <div>There was an error loading the info</div>;
+      return <ErrorMessage />;
     }
 
-    return projectDetail.map(item => (
+    if (!currentProject || currentProject.size === 0) {
+      return (
+        <div>
+          &nbsp;&nbsp;&nbsp;Select one project on side nav to display details
+        </div>
+      );
+    }
+
+    const detailList = projectDetail.map(item => (
       <div key={item.id}>
         <ProjectDetailItem item={item} detailType={detailType} />
       </div>
     ));
+
+    return (
+      <div className="ProjectDetail">
+        <h2>{currentProject.name}</h2>
+        <p>{currentProject.description}</p>
+        <p>
+          <strong>Last updated:</strong> {currentProject.updated_at}
+        </p>
+        <h3>Contributor List</h3>
+        <div className="DetailList">{detailList}</div>
+      </div>
+    );
   }
 }
 
 ProjectDetail.propTypes = {
+  currentProject: PropTypes.object,
   projectDetail: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.object),
     PropTypes.object,
