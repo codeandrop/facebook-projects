@@ -12,7 +12,7 @@ import {
 import { username } from '../../config';
 
 export function* getProjects() {
-  const requestURL = `https://api.github.com/users/${username}/repos?type=all`;
+  const requestURL = `https://api.github.com/users/${username}/repos?type=all&per_page=100`;
 
   try {
     const projects = yield call(request, requestURL);
@@ -33,7 +33,7 @@ export function* getProjectDetail({ projectName, detailType }) {
     element => element.full_name === projectName,
   );
 
-  const requestURL = `https://api.github.com/repos/${projectName}/${detailType}`;
+  const requestURL = `https://api.github.com/repos/${projectName}/${detailType}?per_page=100`;
 
   try {
     const projectDetail = yield call(request, requestURL);

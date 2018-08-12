@@ -12,8 +12,7 @@ class Project extends React.Component {
           className="button"
           onClick={() => getProjectDetail(project.full_name, 'contributors')}
         >
-          <strong>Project:</strong>
-          {project.name}
+          <strong>Project:</strong> {project.name}
         </button>
         <br />
         <span>
