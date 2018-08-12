@@ -2,9 +2,13 @@
 
 The app will list repositories owned by Facebook on Github sorted by watchers. It will also display basic repository details like name, description, last updated date and contributor list.
 
+# Requirements
+- Node: 8
+- Yarn (optional)
+
 ## Installation Instructions
 1. Clone the repository and `cd` into it.
-2. Run `npm i`
+2. Run `npm i` or `yarn`
 3. Run `npm start`
 4. Browse to `localhost:3010`
 
